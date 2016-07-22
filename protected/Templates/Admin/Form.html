@@ -1,0 +1,12 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+    <h2>{{ act }} новости</h2>
+    <form action="/articles/save/{{ id }}" method="post">
+        <label for="title">Заголовок новости: </label><br>
+        <input type="text" id="title" name="title" value="{{ title }}" style="width: 425px;"/><br><br>
+        <label for="text">Описание новости: </label><br>
+        <textarea id="text" name="text" rows="10" cols="55">{{ text }}</textarea><br><br>
+        <input type="submit" value="Сохранить" />
+    </form>
+{% endblock %}

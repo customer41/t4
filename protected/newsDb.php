@@ -31,4 +31,10 @@ return [
     'text' => 'Описание пятой новости',
     'img' => '/Layouts/images/image5.jpg',
   ],
+  6 =>
+  [
+    'title' => 'Шестая новость',
+    'text' => 'Описание шестой новости',
+    'img' => '/Layouts/images/image6.jpg',
+  ],
 ];
