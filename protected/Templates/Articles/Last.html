@@ -1,0 +1,10 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+    {% for item in news %}
+        <h1>{{ item.title }}</h1>
+        <p>{{ item.text }}</p>
+        <p>{{ item.img }}</p>
+        <hr>
+    {% endfor %}
+{% endblock %}
