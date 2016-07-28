@@ -1,0 +1,32 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+    <h1 style="text-align: center;">Категории товаров</h1>
+    <hr>
+    <h3>Общая структура</h3>
+    <a href="/categories/add/" style="border: 1px solid lightskyblue; background-color: lightskyblue; border-radius: 5px; margin-left: 10px; text-decoration: none">
+        Добавить категорию
+    </a>
+    <div style="margin: 50px;">
+        {% for item in tree %}
+            {% if (item.__lvl == 0) %}
+                <span>{{ item.title }}</span>
+                <br>
+            {% elseif (item.__lvl == 1) %}
+                <span>&emsp;-{{ item.title }}
+                    <a href="/categories/delete?id={{ item.__id }}" style="text-decoration: none;">&emsp;del</a>
+                    <a href="/categories/up?id={{ item.__id }}" style="text-decoration: none;">&emsp;up</a>
+                    <a href="/categories/down?id={{ item.__id }}" style="text-decoration: none;">&emsp;down</a>
+                </span>
+                <br>
+            {% elseif (item.__lvl == 2) %}
+                <span>&emsp;&emsp;--{{ item.title }}
+                    <a href="/categories/delete?id={{ item.__id }}" style="text-decoration: none;">&emsp;del</a>
+                    <a href="/categories/up?id={{ item.__id }}" style="text-decoration: none;">&emsp;up</a>
+                    <a href="/categories/down?id={{ item.__id }}" style="text-decoration: none;">&emsp;down</a>
+                </span>
+                <br>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

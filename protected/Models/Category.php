@@ -5,22 +5,23 @@ namespace App\Models;
 use T4\Orm\Model;
 
 /**
- * Class Articles
+ * Class Category
  * @package App\Models
  *
- * @property string $text
- * @property string $date
  * @property string $title
  */
-class Articles
+class Category
     extends Model
 {
     static protected $schema = [
-        'table' => 'news',
+        'table' => 'categories',
         'columns' => [
             'title' => ['type' => 'string'],
-            'text' => ['type' => 'text'],
-            'date' => ['type' => 'datetime'],
         ],
+        'relations' => [
+            'products' => ['type' => self::HAS_MANY, 'model' => Products::class],
+        ]
     ];
+
+    static protected $extensions = ['tree'];
 }

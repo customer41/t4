@@ -13,4 +13,13 @@ return [
     '/articles/save' => '//Admin/Add',
     '/articles/delete/<1>' => '//Admin/Delete(id=<1>)',
     '/articles/edit/<1>' => '//Admin/Form',
+
+    '/categories' => '//AdminCategories/TreeOutPut',
+    '/categories/add' => '//AdminCategories/Add',
+    '/categories/save' => '//AdminCategories/Save',
+    '/categories/delete' => '//AdminCategories/Delete',
+    '/categories/up' => '//AdminCategories/Up',
+    '/categories/down' => '//AdminCategories/Down',
+
+    '/goods/show' => '//Products/GoodsOutput',
 ];

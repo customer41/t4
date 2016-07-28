@@ -1,0 +1,59 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+
+    <style>
+        table, tr, td, th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 10px;
+        }
+    </style>
+
+    <h1 style="text-align: center">Продукты в категории "{{ mainCat.title }}"</h1>
+    <hr>
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Цена</th>
+        </tr>
+        {% for item in mainCat.products %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Продукты в подкатегориях "{{ mainCat.title }}"</h2>
+    <hr>
+    <table>
+        <tr>
+            {% for cat in subCats %}
+                <th>{{ cat.title }}</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for cat in subCats %}
+                <td>
+                    <table>
+                        <tr>
+                            <th>Название</th>
+                            <th>Цена</th>
+                        </tr>
+                        {% for item in cat.products %}
+                            <tr>
+                                <td>{{ item.title }}</td>
+                                <td>{{ item.price }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </td>
+            {% endfor %}
+        </tr>
+    </table>
+
+{% endblock %}

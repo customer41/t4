@@ -1,0 +1,27 @@
+{% extends 'Index.html' %}
+
+{% block content %}
+    <h1 style="text-align: center;">Категории товаров</h1>
+    <hr>
+    <h3>Добавление категории</h3>
+    <div style="margin: 50px;">
+        <form action="/categories/save/" method="post">
+            <label for="title">Название категории:</label><br>
+            <input type="text" id="title" name="title" style="width: 200px;" /><br><br>
+            <label for="parent">Указать родительский элемент:</label><br>
+            <select id="parent" name="parent">
+                {% for item in tree %}
+                    {% if (item.__lvl == 0) %}
+                        <option value="{{ item.title }}">{{ item.title }}</option>
+                    {% elseif (item.__lvl == 1) %}
+                        <option value="{{ item.title }}">&emsp;{{ item.title }}</option>
+                    {% elseif (item.__lvl == 2) %}
+                        <option disabled>&emsp;&emsp;{{ item.title }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select><br><br>
+            <input type="submit" value="Добавить" />
+        </form>
+    </div>
+    <a href="/categories/">К категориям</a>
+{% endblock %}
