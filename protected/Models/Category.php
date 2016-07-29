@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use T4\Core\Exception;
 use T4\Orm\Model;
 
 /**
@@ -24,4 +26,24 @@ class Category
     ];
 
     static protected $extensions = ['tree'];
+
+    protected function validateTitle($val)
+    {
+        if (mb_strlen($val) < 3) {
+            throw new Exception('Слишком короткое название'); 
+        }
+        return true;
+    }
+
+    protected function sanitizeTitle($val)
+    {
+        return $val;
+    }
+
+    protected function afterDelete()
+    {
+        foreach ($this->products as $product) {
+            $product->delete();
+        }
+    }
 }

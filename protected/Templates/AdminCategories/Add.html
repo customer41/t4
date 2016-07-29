@@ -4,10 +4,13 @@
     <h1 style="text-align: center;">Категории товаров</h1>
     <hr>
     <h3>Добавление категории</h3>
+    {% for error in errors %}
+        {{ error.message }}
+    {% endfor %}
     <div style="margin: 50px;">
         <form action="/categories/save/" method="post">
             <label for="title">Название категории:</label><br>
-            <input type="text" id="title" name="title" style="width: 200px;" /><br><br>
+            <input type="text" id="title" name="cat[title]" style="width: 200px;" /><br><br>
             <label for="parent">Указать родительский элемент:</label><br>
             <select id="parent" name="parent">
                 {% for item in tree %}

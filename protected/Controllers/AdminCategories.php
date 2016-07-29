@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Category;
+use T4\Core\MultiException;
 use T4\Mvc\Controller;
 
 class AdminCategories
@@ -15,16 +16,24 @@ class AdminCategories
     
     public function actionAdd()
     {
+        if (isset($this->app->flash->errors)) {
+            $this->data->errors = $this->app->flash->errors;
+        }
         $this->data->tree = Category::findAllTree();
     }
 
-    public function actionSave($title, $parent)
+    public function actionSave($cat, $parent)
     {
         $category = new Category();
-        $category->title = $title;
         $category->parent = Category::findByTitle($parent);
-        $category->save();
-        $this->redirect('/categories/');
+        try {
+            $category->fill($cat);
+            $category->save();
+            $this->redirect('/categories/');
+        } catch (MultiException $errors) {
+            $this->app->flash->errors = $errors;
+            $this->redirect('/categories/add');
+        }
     }
 
     public function actionDelete($id)
